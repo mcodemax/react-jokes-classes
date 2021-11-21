@@ -82,11 +82,6 @@ class JokeList extends React.Component {
 
   }
 
-  //make a this.setState to update this.state.jokes arr
-  // setJokes(arrOfJokes) {
-  //   this.setState({jokes: [...arrOfJokes]})
-  // }
-
   async getJokes() {
     let j = [...this.state.jokes];
     let seenJokes = new Set();
@@ -104,45 +99,37 @@ class JokeList extends React.Component {
           console.error("duplicate found!");
         }
       }
-      // this.setJokes(j);
-      this.setState({ jokes: j });
+      // only calls setState if the jokesArr in state changed
+      if(JSON.stringify(j) !== JSON.stringify(this.state.jokes))
+        this.setState({ jokes: j });
     } catch (e) {
       console.log(e);
     }
   }
 
-  //prob need an async component did mount to mimic useEffect
   /** get jokes if no jokes */
   async componentDidMount() {
-    // this.getJokes() //prob not needed
-
     if (this.state.jokes.length === 0) this.getJokes();
   }
 
   async componentDidUpdate(prevProps, prevState) {
     // if we received a new todo, we need to fetch its data
-    // if (JSON.stringify(prevState.jokes) !== JSON.stringify(this.props.jokes)) { //Q: not sure about this conditional if correct
-      // this.getJokes();
-    // }
-
     this.getJokes();
+
+    //need a condition to stop infinite loop, unless you alter getJokes
   };
 
   
   /* empty joke list and then call getJokes */
   generateNewJokes() {
-    // this.setJokes([]);
-
     this.setState({ jokes: [] })
   }
 
   /* change vote for this id by delta (+1 or -1) */
 
   vote(id, delta) {
-    //might be wrong. might need to alter callback //we don't have access to jokes as a variable here like in nonclass componenets
     const rearrangedJokes = this.state.jokes.map(j => (j.id === id ? { ...j, votes: j.votes + delta } : j));
 
-    // this.setJokes(rearrangedJokes);
     this.setState({jokes: rearrangedJokes})
   }
 
