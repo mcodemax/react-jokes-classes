@@ -24,4 +24,31 @@ function Joke({ vote, votes, text, id }) {
   );
 }
 
+// class Joke2 extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { count: 0 };
+//   }
+  
+//   render(){
+//     return (
+//     <div className="Joke">
+//       <div className="Joke-votearea">
+//         <button onClick={upVote}>
+//           <i className="fas fa-thumbs-up" />
+//         </button>
+
+//         <button onClick={downVote}>
+//           <i className="fas fa-thumbs-down" />
+//         </button>
+
+//         {votes}
+//       </div>
+
+//       <div className="Joke-text">{text}</div>
+//     </div>
+//     ) 
+//   }
+// }
+
 export default Joke;
