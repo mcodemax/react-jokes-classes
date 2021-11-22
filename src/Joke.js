@@ -29,10 +29,13 @@ class Joke extends React.Component {
     super(props);
     this.state = { count: 0 };
     this.vote = this.props.vote;
+    
     this.upVote = () => { this.props.vote(this.props.id, +1) }; //see commented below upVote
     this.downVote = () => { this.props.vote(this.props.id, -1) }; //see commented below downVote
     
   }
+
+  /*arrow f()s are anon and don't redefine this; that's why the commmented out code doesn't work*/
 
   // upVote() {
   //   console.log(this)
@@ -46,7 +49,9 @@ class Joke extends React.Component {
   render(){
     return (
     <div className="Joke">
+      
       <div className="Joke-votearea">
+        {console.log(this)}
         <button onClick={this.upVote}>
           <i className="fas fa-thumbs-up" />
         </button>
